@@ -1,23 +1,55 @@
-# Definir la taxonomía como un diccionario donde las claves son las categorías y los valores son listas de objetos
-taxonomia = {
-    "Animales": ["Perro", "Gato", "Elefante"],
-    "Frutas": ["Manzana", "Banana", "Naranja"],
-    "Colores": ["Rojo", "Verde", "Azul"]
-}
+# Definición de los marcos para representar conocimiento
 
-# Función para imprimir la taxonomía
-def imprimir_taxonomia(taxonomia):
-    for categoria, objetos in taxonomia.items():  # Iterar sobre las claves y valores del diccionario
-        print(categoria + ":")  # Imprimir el nombre de la categoría
-        for objeto in objetos:  # Iterar sobre los objetos dentro de la categoría
-            print("- " + objeto)  # Imprimir cada objeto con un guion al inicio
+# Definir un marco para una acción
+class Accion:
+    def __init__(self, nombre, descripcion):
+        self.nombre = nombre  # Nombre de la acción
+        self.descripcion = descripcion  # Descripción de la acción
+
+    def __str__(self):
+        return f"Accion: {self.nombre}, Descripcion: {self.descripcion}"
+
+
+# Definir un marco para una situación
+class Situacion:
+    def __init__(self, lugar, hora, clima):
+        self.lugar = lugar  # Lugar de la situación
+        self.hora = hora  # Hora de la situación
+        self.clima = clima  # Clima de la situación
+
+    def __str__(self):
+        return f"Situacion: Lugar={self.lugar}, Hora={self.hora}, Clima={self.clima}"
+
+
+# Definir un marco para un evento
+class Evento:
+    def __init__(self, accion, situacion):
+        self.accion = accion  # Acción relacionada con el evento
+        self.situacion = situacion  # Situación en la que ocurre el evento
+
+    def __str__(self):
+        return f"Evento: {self.accion}, {self.situacion}"
+
 
 # Función principal
 def main():
-    print("Taxonomía:")  # Imprimir encabezado
-    imprimir_taxonomia(taxonomia)  # Llamar a la función para imprimir la taxonomía
+    # Crear instancias de acciones
+    accion1 = Accion("Jugar al fútbol", "Divertirse con amigos en el campo")
+    accion2 = Accion("Estudiar", "Prepararse para un examen importante")
+
+    # Crear instancias de situaciones
+    situacion1 = Situacion("Parque", "Tarde", "Soleado")
+    situacion2 = Situacion("Biblioteca", "Mañana", "Nublado")
+
+    # Crear instancias de eventos
+    evento1 = Evento(accion1, situacion1)
+    evento2 = Evento(accion2, situacion2)
+
+    # Imprimir los eventos creados
+    print(evento1)
+    print(evento2)
+
 
 if __name__ == "__main__":
     main()
-
 
