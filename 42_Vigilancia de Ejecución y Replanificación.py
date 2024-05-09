@@ -1,25 +1,34 @@
-# Programa de planificación condicional simple
+# Programa de vigilancia de ejecución y replanificación
 
-# Definir una función para la planificación condicional
-def planificacion_condicional(objetivo, precondiciones, efectos):
-    # Verificar si se cumplen todas las precondiciones
-    if all(precondiciones[cond] for cond in precondiciones):
-        # Si se cumplen, aplicar los efectos y alcanzar el objetivo
-        for efecto in efectos:
-            objetivo[efecto] = efectos[efecto]
-        print("Objetivo alcanzado:", objetivo)
-    else:
-        print("No se cumplen todas las precondiciones. No se puede alcanzar el objetivo.")
+# Función para simular la ejecución de una tarea
+def ejecutar_tarea(tarea):
+    print("Ejecutando la tarea:", tarea)
+
+# Función para simular la vigilancia de ejecución y replanificación
+def vigilancia_replanificacion():
+    while True:
+        tarea_actual = input("Ingrese la tarea actual: ")  # Solicitar al usuario la tarea actual
+        if tarea_actual == "terminar":
+            print("Programa finalizado.")
+            break  # Salir del bucle si se ingresa "terminar"
+        
+        # Simular la ejecución de la tarea actual
+        ejecutar_tarea(tarea_actual)
+        
+        # Verificar si hay algún problema durante la ejecución
+        problema = input("Hubo algún problema durante la ejecución (s/n)? ")
+        if problema.lower() == "s":
+            print("Replanificando...")
+            # Simular la replanificación
+            nueva_tarea = input("Ingrese la nueva tarea: ")
+            print("Replanificación completada. Ejecutando la nueva tarea:", nueva_tarea)
+        else:
+            print("La ejecución de la tarea fue exitosa.")
 
 # Función principal
 def main():
-    # Definir el objetivo, las precondiciones y los efectos
-    objetivo = {"estado": "inicial"}  # Estado inicial del objetivo
-    precondiciones = {"estado": "inicial"}  # Estado inicial de las precondiciones
-    efectos = {"estado": "final"}  # Efecto deseado
-
-    # Llamar a la función de planificación condicional
-    planificacion_condicional(objetivo, precondiciones, efectos)
+    print("Bienvenido a la vigilancia de ejecución y replanificación.")
+    vigilancia_replanificacion()  # Llamar a la función de vigilancia de ejecución y replanificación
 
 if __name__ == "__main__":
     main()

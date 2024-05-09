@@ -1,35 +1,22 @@
-# Programa de vigilancia de ejecución y replanificación
+# Programa de planificación continua y multiagente
 
-# Función para simular la ejecución de una tarea
-def ejecutar_tarea(tarea):
-    print("Ejecutando la tarea:", tarea)
-
-# Función para simular la vigilancia de ejecución y replanificación
-def vigilancia_replanificacion():
-    while True:
-        tarea_actual = input("Ingrese la tarea actual: ")  # Solicitar al usuario la tarea actual
-        if tarea_actual == "terminar":
-            print("Programa finalizado.")
-            break  # Salir del bucle si se ingresa "terminar"
-        
-        # Simular la ejecución de la tarea actual
-        ejecutar_tarea(tarea_actual)
-        
-        # Verificar si hay algún problema durante la ejecución
-        problema = input("Hubo algún problema durante la ejecución (s/n)? ")
-        if problema.lower() == "s":
-            print("Replanificando...")
-            # Simular la replanificación
-            nueva_tarea = input("Ingrese la nueva tarea: ")
-            print("Replanificación completada. Ejecutando la nueva tarea:", nueva_tarea)
-        else:
-            print("La ejecución de la tarea fue exitosa.")
+# Definir la función de planificación para un agente
+def planificacion_agente(agente, tarea):
+    # Simulación de la planificación del agente para la tarea
+    print(f"El agente {agente} está planificando la tarea: {tarea}")
 
 # Función principal
 def main():
-    print("Bienvenido a la vigilancia de ejecución y replanificación.")
-    vigilancia_replanificacion()  # Llamar a la función de vigilancia de ejecución y replanificación
+    # Lista de agentes y tareas
+    agentes = ["Agente1", "Agente2", "Agente3"]
+    tareas = ["Tarea1", "Tarea2", "Tarea3"]
+
+    # Planificación para cada agente y tarea
+    for agente in agentes:
+        for tarea in tareas:
+            planificacion_agente(agente, tarea)  # Llama a la función de planificación para cada combinación de agente y tarea
 
 if __name__ == "__main__":
     main()
+
 

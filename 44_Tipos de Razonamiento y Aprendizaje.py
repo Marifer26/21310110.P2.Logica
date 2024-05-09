@@ -1,20 +1,32 @@
-# Programa de planificación continua y multiagente
 
-# Definir la función de planificación para un agente
-def planificacion_agente(agente, tarea):
-    # Simulación de la planificación del agente para la tarea
-    print(f"El agente {agente} está planificando la tarea: {tarea}")
+# Programa de aprendizaje inductivo para predecir el clima
+
+# Datos de ejemplo: cada tupla contiene (temperatura, humedad, viento, clima)
+datos = [
+    (30, 80, False, 'soleado'),
+    (22, 40, True, 'lluvioso'),
+    (25, 65, True, 'nublado'),
+    (18, 50, False, 'lluvioso'),
+]
+
+# Función para predecir el clima basada en el aprendizaje inductivo
+def predecir_clima(datos_entrenamiento, nueva_lectura):
+    # Iterar sobre los datos de entrenamiento
+    for lectura in datos_entrenamiento:
+        # Si la nueva lectura coincide con algún dato de entrenamiento, devolver el clima
+        if lectura[:-1] == nueva_lectura:
+            return lectura[-1]
+    # Si no se encuentra una coincidencia, devolver un mensaje de error
+    return "No se puede predecir el clima"
 
 # Función principal
 def main():
-    # Lista de agentes y tareas
-    agentes = ["Agente1", "Agente2", "Agente3"]
-    tareas = ["Tarea1", "Tarea2", "Tarea3"]
-
-    # Planificación para cada agente y tarea
-    for agente in agentes:
-        for tarea in tareas:
-            planificacion_agente(agente, tarea)  # Llama a la función de planificación para cada combinación de agente y tarea
+    # Nueva lectura de temperatura, humedad y viento
+    nueva_lectura = (28, 70, False)
+    # Predecir el clima para la nueva lectura
+    prediccion = predecir_clima(datos, nueva_lectura)
+    # Imprimir la predicción del clima
+    print("La predicción del clima para la nueva lectura es:", prediccion)
 
 if __name__ == "__main__":
     main()
