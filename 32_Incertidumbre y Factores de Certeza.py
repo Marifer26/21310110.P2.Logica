@@ -1,48 +1,19 @@
 
-# Programa de razonamiento por defecto y no monotónico
-
-# Definir una función para verificar si un ave es un pingüino
-def es_pinguino(ave):
-    # Lista de características comunes de los pingüinos
-    caracteristicas_comunes = ["nadar", "plumas", "pico corto"]
-
-    # Si todas las características comunes están presentes en el ave, entonces es un pingüino
-    if all(caracteristica in ave for caracteristica in caracteristicas_comunes):
-        return True
+# Definir una función para evaluar un hecho con un factor de certeza dado
+def evaluar_hecho(hecho, factor_certeza):
+    if factor_certeza > 0.5:
+        print(f"El hecho '{hecho}' es cierto con un factor de certeza del {factor_certeza * 100}%.")
+    elif factor_certeza == 0.5:
+        print(f"No se puede determinar la certeza del hecho '{hecho}'.")
     else:
-        return False
-
-# Definir una función para verificar si un ave es un águila
-def es_aguila(ave):
-    # Lista de características comunes de las águilas
-    caracteristicas_comunes = ["volar", "garras", "pico afilado"]
-
-    # Si todas las características comunes están presentes en el ave, entonces es un águila
-    if all(caracteristica in ave for caracteristica in caracteristicas_comunes):
-        return True
-    else:
-        return False
-
-# Definir una función para identificar el ave desconocida
-def identificar_ave(ave):
-    if es_pinguino(ave):  # Verificar si el ave tiene características de pingüino
-        return "El ave es un pingüino."
-    elif es_aguila(ave):  # Verificar si el ave tiene características de águila
-        return "El ave es un águila."
-    else:
-        return "No se puede identificar el tipo de ave."
+        print(f"El hecho '{hecho}' es falso con un factor de certeza del {(1 - factor_certeza) * 100}%.")
 
 # Función principal
 def main():
-    # Ejemplos de aves para identificar
-    ave1 = ["nadar", "plumas", "pico corto"]  # Pingüino
-    ave2 = ["volar", "garras", "pico afilado"]  # Águila
-    ave3 = ["nadar", "garras"]  # Ave desconocida
-
-    # Identificar las aves
-    print(identificar_ave(ave1))
-    print(identificar_ave(ave2))
-    print(identificar_ave(ave3))
+    # Ejemplos de hechos con sus respectivos factores de certeza
+    evaluar_hecho("Llueve hoy", 0.8)
+    evaluar_hecho("Hace sol", 0.2)
+    evaluar_hecho("El cielo está despejado", 0.5)
 
 if __name__ == "__main__":
     main()

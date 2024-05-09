@@ -1,20 +1,42 @@
-# Definir una función para evaluar un hecho con un factor de certeza dado
-def evaluar_hecho(hecho, factor_certeza):
-    if factor_certeza > 0.5:
-        print(f"El hecho '{hecho}' es cierto con un factor de certeza del {factor_certeza * 100}%.")
-    elif factor_certeza == 0.5:
-        print(f"No se puede determinar la certeza del hecho '{hecho}'.")
+
+# Sistema experto simple para determinar si alguien está calificado para un trabajo
+
+# Definir la base de conocimientos con reglas
+base_conocimientos = {
+    "experiencia": {
+        "Juan": 5,
+        "María": 3,
+        "Pedro": 2
+    },
+    "educacion": {
+        "Juan": "Licenciatura",
+        "María": "Maestría",
+        "Pedro": "Bachillerato"
+    },
+    "edad": {
+        "Juan": 30,
+        "María": 35,
+        "Pedro": 25
+    }
+}
+
+# Función para evaluar si alguien está calificado para el trabajo
+def sistema_experto(nombre):
+    experiencia = base_conocimientos["experiencia"][nombre]
+    educacion = base_conocimientos["educacion"][nombre]
+    edad = base_conocimientos["edad"][nombre]
+
+    if experiencia >= 3 and educacion in ["Licenciatura", "Maestría"] and edad >= 25:
+        return f"{nombre} está calificado para el trabajo."
     else:
-        print(f"El hecho '{hecho}' es falso con un factor de certeza del {(1 - factor_certeza) * 100}%.")
+        return f"{nombre} no está calificado para el trabajo."
 
 # Función principal
 def main():
-    # Ejemplos de hechos con sus respectivos factores de certeza
-    evaluar_hecho("Llueve hoy", 0.8)
-    evaluar_hecho("Hace sol", 0.2)
-    evaluar_hecho("El cielo está despejado", 0.5)
+    # Ejemplos de consultas al sistema experto
+    print(sistema_experto("Juan"))  # Consulta para Juan
+    print(sistema_experto("María"))  # Consulta para María
+    print(sistema_experto("Pedro"))  # Consulta para Pedro
 
 if __name__ == "__main__":
     main()
-
-

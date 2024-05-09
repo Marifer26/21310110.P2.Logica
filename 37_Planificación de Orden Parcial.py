@@ -1,25 +1,35 @@
-# Definición de las acciones y el espacio de estados
+# Programa de planificación de orden parcial
 
-# Acciones disponibles para el agente
-acciones = ['ir_a_clase', 'estudiar', 'tomar_un_descanso', 'salir_con_amigos']
+# Definir una función para la planificación de orden parcial
+def planificacion_orden_parcial(tareas):
+    plan = []  # Inicializar el plan vacío
 
-# Definición del espacio de estados como un diccionario
-espacio_estados = {
-    'clase': ['estudiar', 'tomar_un_descanso'],
-    'casa': ['ir_a_clase', 'estudiar', 'tomar_un_descanso'],
-    'biblioteca': ['estudiar', 'tomar_un_descanso'],
-    'cafeteria': ['salir_con_amigos']
-}
+    # Iterar sobre todas las tareas
+    for tarea in tareas:
+        # Verificar si todas las tareas previas de la tarea actual están en el plan
+        if all(tarea_previa in plan for tarea_previa in tarea["previas"]):
+            plan.append(tarea)  # Agregar la tarea al plan si todas las tareas previas están en el plan
 
-# Función para imprimir el espacio de estados
-def imprimir_espacio_estados():
-    print("Espacio de Estados:")
-    for lugar, acciones_posibles in espacio_estados.items():
-        print(f"- En {lugar}, puedes hacer: {', '.join(acciones_posibles)}")
+    return plan  # Devolver el plan resultante
 
 # Función principal
 def main():
-    imprimir_espacio_estados()  # Imprime el espacio de estados inicial
+    # Definir las tareas con sus respectivas tareas previas
+    tareas = [
+        {"nombre": "Tarea A", "previas": []},
+        {"nombre": "Tarea B", "previas": ["Tarea A"]},
+        {"nombre": "Tarea C", "previas": ["Tarea A", "Tarea B"]},
+        {"nombre": "Tarea D", "previas": ["Tarea C"]},
+        {"nombre": "Tarea E", "previas": ["Tarea B"]},
+    ]
+
+    # Realizar la planificación de orden parcial
+    plan = planificacion_orden_parcial(tareas)
+
+    # Mostrar el plan resultante
+    print("Planificación de Orden Parcial:")
+    for tarea in plan:
+        print(tarea["nombre"])
 
 if __name__ == "__main__":
     main()

@@ -1,43 +1,35 @@
-# Sistema experto simple para determinar si alguien está calificado para un trabajo
+import random  # Importa la biblioteca random para generar números aleatorios
 
-# Definir la base de conocimientos con reglas
-base_conocimientos = {
-    "experiencia": {
-        "Juan": 5,
-        "María": 3,
-        "Pedro": 2
-    },
-    "educacion": {
-        "Juan": "Licenciatura",
-        "María": "Maestría",
-        "Pedro": "Bachillerato"
-    },
-    "edad": {
-        "Juan": 30,
-        "María": 35,
-        "Pedro": 25
-    }
-}
+# Definición de la clase del modelo probabilista racional
+class ModeloProbabilistaRacional:
+    def __init__(self, opciones):
+        self.opciones = opciones  # Inicializa las opciones disponibles
+        self.probabilidades = {opcion: 1 / len(opciones) for opcion in opciones}  # Inicializa las probabilidades uniformemente
 
-# Función para evaluar si alguien está calificado para el trabajo
-def sistema_experto(nombre):
-    experiencia = base_conocimientos["experiencia"][nombre]
-    educacion = base_conocimientos["educacion"][nombre]
-    edad = base_conocimientos["edad"][nombre]
+    # Método para actualizar las probabilidades basadas en la evidencia
+    def actualizar_probabilidades(self, evidencia):
+        total = sum(self.probabilidades[opcion] for opcion in self.opciones)  # Calcula la suma total de las probabilidades
+        for opcion in self.opciones:
+            if opcion == evidencia:
+                self.probabilidades[opcion] /= total  # Actualiza la probabilidad de la opción con la evidencia
+            else:
+                self.probabilidades[opcion] = 0  # Establece la probabilidad de las otras opciones a cero
 
-    if experiencia >= 3 and educacion in ["Licenciatura", "Maestría"] and edad >= 25:
-        return f"{nombre} está calificado para el trabajo."
-    else:
-        return f"{nombre} no está calificado para el trabajo."
+    # Método para tomar una decisión basada en las probabilidades actuales
+    def tomar_decision(self):
+        return random.choices(self.opciones, weights=self.probabilidades.values())[0]  # Elige una opción basada en las probabilidades actuales
 
 # Función principal
 def main():
-    # Ejemplos de consultas al sistema experto
-    print(sistema_experto("Juan"))  # Consulta para Juan
-    print(sistema_experto("María"))  # Consulta para María
-    print(sistema_experto("Pedro"))  # Consulta para Pedro
+    opciones = ["A", "B", "C"]  # Definir las opciones disponibles
+    modelo = ModeloProbabilistaRacional(opciones)  # Crear una instancia del modelo probabilista racional
+
+    # Actualizar las probabilidades basadas en una evidencia y tomar una decisión
+    evidencia = "A"
+    modelo.actualizar_probabilidades(evidencia)
+    decision = modelo.tomar_decision()
+    print("Decisión tomada:", decision)
 
 if __name__ == "__main__":
     main()
-
 
